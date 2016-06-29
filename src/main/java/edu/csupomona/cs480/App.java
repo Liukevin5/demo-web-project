@@ -7,6 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import edu.csupomona.cs480.data.provider.FSUserManager;
+import edu.csupomona.cs480.data.provider.GpsProductManager;
+import edu.csupomona.cs480.data.provider.JsoupBasedGpsProductManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 
 @Configuration
@@ -24,6 +26,11 @@ public class App {
     public UserManager userManager() {
         UserManager userManager = new FSUserManager();
         return userManager;
+    }
+    
+    @Bean
+    public GpsProductManager gpsProductManager() {
+    		return new JsoupBasedGpsProductManager();
     }
 
     /**

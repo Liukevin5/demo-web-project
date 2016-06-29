@@ -3,15 +3,18 @@ package edu.csupomona.cs480.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.csupomona.cs480.App;
+import edu.csupomona.cs480.data.GpsProduct;
 import edu.csupomona.cs480.data.User;
+import edu.csupomona.cs480.data.provider.GpsProductManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 
 
@@ -23,7 +26,7 @@ import edu.csupomona.cs480.data.provider.UserManager;
  *
  */
 
-@RestController
+@Controller
 public class WebController {
 
 	/**
@@ -36,6 +39,9 @@ public class WebController {
 	 */
 	@Autowired
 	private UserManager userManager;
+	
+	@Autowired
+	private GpsProductManager gpsProductManager;
 
 	/**
 	 * This is a simple example of how the HTTP API works.
@@ -44,13 +50,25 @@ public class WebController {
 	 * in your web browser, type the link:
 	 * 	http://localhost:8080/cs480/ping
 	 */
-	@RequestMapping(value = "/cs480/ping", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs480/healthcheck", method = RequestMethod.GET)
 	String healthCheck() {
 		// You can replace this with other string,
 		// and run the application locally to check your changes
 		// with the URL: http://localhost:8080/
-		return "OK";
+		return "OK-In-CS480";
 	}
+	
+	@RequestMapping(value = "/list/all/gps", method = RequestMethod.GET)
+	List<GpsProduct> listAllGpsProducts() {		
+		return gpsProductManager.listAllGpsProducts();
+	}
+	
+	@RequestMapping(value = "/list/all/gps/page", method = RequestMethod.GET)
+	String listAllGpsProductsAsPage() {	
+		return "home-gps.html";
+	}
+	
+	
 
 	/**
 	 * This is a simple example of how to use a data manager
