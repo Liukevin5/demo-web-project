@@ -21,6 +21,8 @@ import edu.csupomona.cs480.util.ResourceResolver;
  */
 public class FSUserManager implements UserManager {
 
+	public static int[] lines = new int[90];
+	
 	/**
 	 * We persist all the user related objects as JSON.
 	 * <p>
@@ -38,19 +40,25 @@ public class FSUserManager implements UserManager {
 	 * @return
 	 */
 	private UserMap getUserMap() {
+		lines[0] = 1;
 		UserMap userMap = null;
+		lines[1] = 1;
 		File userFile = ResourceResolver.getUserFile();
+		lines[2] = 1;
 		if (userFile.exists()) {
 			// read the file and convert the JSON content
 			// to the UserMap object
 			try {
+				lines[3] = 1;
 				userMap = JSON.readValue(userFile, UserMap.class);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
+			lines[4] = 1;
 			userMap = new UserMap();
 		}
+		lines[5] = 1;
 		return userMap;
 	}
 
@@ -62,6 +70,7 @@ public class FSUserManager implements UserManager {
 	private void persistUserMap(UserMap userMap) {
 		try {
 			// convert the user object to JSON format
+			lines[6] = 1;
 			JSON.writeValue(ResourceResolver.getUserFile(), userMap);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -70,7 +79,9 @@ public class FSUserManager implements UserManager {
 
 	@Override
 	public User getUser(String userId) {
+		lines[7] = 1;
 		UserMap userMap = getUserMap();
+		lines[8] = 1;
 		return userMap.get(userId);
 	}
 

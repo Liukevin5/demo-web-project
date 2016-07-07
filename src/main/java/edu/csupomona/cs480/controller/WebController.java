@@ -57,6 +57,14 @@ public class WebController {
 		return "OK-In-CS480";
 	}
 	
+	@RequestMapping(value = "/cs480/new/api", method = RequestMethod.GET)
+	String healthCheck2() {
+		// You can replace this with other string,
+		// and run the application locally to check your changes
+		// with the URL: http://localhost:8080/
+		return "My new API 2.0!";
+	}
+	
 	@RequestMapping(value = "/list/all/gps", method = RequestMethod.GET)
 	List<GpsProduct> listAllGpsProducts() {		
 		return gpsProductManager.listAllGpsProducts();
