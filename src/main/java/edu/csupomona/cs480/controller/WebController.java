@@ -62,7 +62,7 @@ public class WebController {
 		// You can replace this with other string,
 		// and run the application locally to check your changes
 		// with the URL: http://localhost:8080/
-		return "My new API 2.0!";
+		return "My new API 3.0!";
 	}
 	
 	@RequestMapping(value = "/list/all/gps", method = RequestMethod.GET)
